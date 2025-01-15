@@ -11,4 +11,8 @@ RUN echo 'server { \
     location / { \
         try_files $uri $uri/ /index.html; \
     } \
+    location ~* \.(?:js|css)$ { \
+        expires -1; \
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"; \
+    } \
 }' > /etc/nginx/conf.d/default.conf

@@ -200,7 +200,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 t.date.startsWith(today) && t.status === 'concluido'
             );
             
-            const totalValue = todayTransactions.reduce((sum, t) => sum + t.value, 0);
+            const totalValue = todayTransactions.reduce((sum, t) => {
+                return t.type === 'output' ? sum - t.value : sum + t.value;
+            }, 0);
             
             document.getElementById('todayTransactions').textContent = todayTransactions.length;
             document.getElementById('totalValue').textContent = formatCurrency(totalValue);

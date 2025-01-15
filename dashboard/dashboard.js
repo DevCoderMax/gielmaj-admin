@@ -1,7 +1,12 @@
 import config from '../config.js';
 
 // Garantir que a URL da API sempre use HTTPS
-const apiBaseUrl = config.apiBaseUrl.replace('http://', 'https://');
+const getApiUrl = () => {
+    // Se config não estiver disponível, usar a URL padrão
+    const baseUrl = (typeof config !== 'undefined' ? config.apiBaseUrl : 'https://max-gielmaj-api.uvxtdw.easypanel.host') || 'https://max-gielmaj-api.uvxtdw.easypanel.host';
+    // Garantir que sempre use HTTPS
+    return baseUrl.replace('http://', 'https://');
+};
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('menuToggle');
@@ -89,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carregar serviços no select
     async function loadServices(selectId = 'transactionService', selectedValue = null) {
         try {
-            const response = await fetch(`${apiBaseUrl}/services`);
+            const response = await fetch(`${getApiUrl()}/services`);
             if (!response.ok) throw new Error('Falha ao carregar serviços');
             
             const services = await response.json();
@@ -148,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         try {
-            const response = await fetch(`${apiBaseUrl}/transactions`, {
+            const response = await fetch(`${getApiUrl()}/transactions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -192,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to update dashboard data
     async function updateDashboardData() {
         try {
-            const response = await fetch(`${apiBaseUrl}/transactions`);
+            const response = await fetch(`${getApiUrl()}/transactions`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -227,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const statusFilter = filterSelect ? filterSelect.value : 'all';
 
         try {
-            const response = await fetch(`${apiBaseUrl}/transactions`);
+            const response = await fetch(`${getApiUrl()}/transactions`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -293,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!confirm('Tem certeza que deseja excluir esta transação?')) return;
         
         try {
-            const response = await fetch(`${apiBaseUrl}/transactions/${transactionId}`, {
+            const response = await fetch(`${getApiUrl()}/transactions/${transactionId}`, {
                 method: 'DELETE'
             });
             
@@ -368,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         try {
-            const response = await fetch(`${apiBaseUrl}/transactions/${transactionId}`, {
+            const response = await fetch(`${getApiUrl()}/transactions/${transactionId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

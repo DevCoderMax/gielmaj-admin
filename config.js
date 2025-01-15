@@ -1,5 +1,5 @@
 const config = {
-    apiBaseUrl: 'http://localhost:8000',
+    apiBaseUrl: 'https://max-gielmaj-api.uvxtdw.easypanel.host',
 };
 
 export default config;

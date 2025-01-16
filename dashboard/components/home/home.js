@@ -1,6 +1,21 @@
 import config from '../../../config.js';
 
 let transactionsChart;
+let refreshInterval;
+
+export function initializeDashboard() {
+    updateDashboardData();
+    
+    // Atualizar a cada minuto
+    refreshInterval = setInterval(updateDashboardData, 60000);
+    
+    // Limpar o intervalo quando a página for fechada ou navegada
+    window.addEventListener('beforeunload', () => {
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+        }
+    });
+}
 
 export async function updateDashboardData() {
     try {

@@ -1,5 +1,5 @@
 import config from '../config.js';
-import { updateDashboardData } from './components/home/home.js';
+import { updateDashboardData, initializeDashboard } from './components/home/home.js';
 import { initializeTransactions, deleteTransaction, showTransactionDetails, showEditTransactionModal } from './components/transactions/transactions.js';
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Carregar o componente Home inicialmente
     await loadContent('home');
+    initializeDashboard();
 
     // Toggle menu on mobile
     menuToggle.addEventListener('click', () => {

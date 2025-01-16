@@ -2,6 +2,13 @@ import config from '../../../config.js';
 
 export async function updateDashboardData() {
     try {
+        // Atualizar nome do usuário
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo') || '{}');
+        const userName = document.getElementById('userName');
+        if (userName && userInfo.display_name) {
+            userName.textContent = userInfo.display_name;
+        }
+
         // Buscar todas as transações
         const response = await fetch(`${config.apiBaseUrl}/transactions`);
         if (!response.ok) throw new Error('Falha ao carregar dados do dashboard');

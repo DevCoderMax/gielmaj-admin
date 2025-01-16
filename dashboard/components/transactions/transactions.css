@@ -1,0 +1,374 @@
+/* Seção de Transações */
+.dashboard-section {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.section-actions {
+    margin-bottom: 20px;
+}
+
+.transactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.transactions-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.date-filters {
+    display: flex;
+    gap: 10px;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.date-filter label {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.date-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-background);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-background);
+    color: var(--text-color);
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-background);
+    color: var(--text-color);
+}
+
+/* Tabela de Transações */
+.transactions-table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    background-color: var(--hover-color);
+}
+
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.items-per-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.items-per-page label {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.pagination button {
+    padding: 6px 12px;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-badge.pendente {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.status-badge.concluido {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.cancelado {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Modais */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--card-background);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* Detalhes da Transação */
+.transaction-details {
+    display: grid;
+    gap: 15px;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 10px;
+}
+
+.detail-label {
+    color: var(--text-color-secondary);
+    font-weight: 500;
+}
+
+.detail-value {
+    color: var(--text-color);
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-background);
+    color: var(--text-color);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Botões */
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-color-dark);
+}
+
+.btn-secondary {
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background: var(--hover-color);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 4px;
+}
+
+.action-button:hover {
+    color: var(--primary-color);
+}
+
+/* Notificações */
+#notificationContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
+    animation: slideIn 0.3s ease-out;
+}
+
+.notification.success {
+    background-color: var(--success-color, #28a745);
+}
+
+.notification.error {
+    background-color: var(--error-color, #dc3545);
+}
+
+.notification.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}

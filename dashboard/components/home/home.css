@@ -56,3 +56,17 @@
     font-weight: bold;
     color: var(--text-color);
 }
+
+.chart-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 400px;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}

@@ -1,0 +1,243 @@
+<section id="transactions" class="dashboard-section">
+    <div class="section-header">
+        <h2>Transações</h2>
+    </div>
+    <div class="section-actions">
+        <button id="addTransactionBtn" class="btn-primary">
+            <i class="fas fa-plus"></i>
+            Nova Transação
+        </button>
+    </div>
+    <div class="transactions-header">
+        <div class="transactions-filters">
+            <input type="text" placeholder="Buscar transação..." class="search-input">
+            <div class="date-filters">
+                <div class="date-filter">
+                    <label>De:</label>
+                    <input type="datetime-local" id="startDate" class="date-input">
+                </div>
+                <div class="date-filter">
+                    <label>Até:</label>
+                    <input type="datetime-local" id="endDate" class="date-input">
+                </div>
+            </div>
+            <select class="filter-select" id="statusFilter">
+                <option value="all">Todos Status</option>
+                <option value="concluido">Concluído</option>
+                <option value="pendente">Pendente</option>
+                <option value="cancelado">Cancelado</option>
+            </select>
+            <select class="filter-select" id="typeFilter">
+                <option value="all">Todos Tipos</option>
+                <option value="input">Entrada</option>
+                <option value="output">Saída</option>
+            </select>
+        </div>
+    </div>
+    <div class="transactions-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Serviço</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="transactionsTableBody">
+                <!-- Transaction rows will be added here dynamically -->
+            </tbody>
+        </table>
+        <div class="table-footer">
+            <div class="items-per-page">
+                <label>Itens por página:</label>
+                <select id="itemsPerPage" class="filter-select">
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="pagination">
+                <button id="prevPage" class="btn-secondary" disabled>Anterior</button>
+                <span id="pageInfo">Página <span id="currentPage">1</span> de <span id="totalPages">1</span></span>
+                <button id="nextPage" class="btn-secondary" disabled>Próxima</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal de Detalhes da Transação -->
+<div id="transactionModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Detalhes da Transação</h2>
+            <button class="close-modal" data-modal="transactionModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="transaction-details">
+                <div class="detail-row">
+                    <span class="detail-label">ID:</span>
+                    <span id="modalId" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Descrição:</span>
+                    <span id="modalDescription" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Tipo:</span>
+                    <span id="modalType" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Valor:</span>
+                    <span id="modalValue" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Método de Pagamento:</span>
+                    <span id="modalPaymentMethod" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Serviço:</span>
+                    <span id="modalService" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Data:</span>
+                    <span id="modalDate" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span id="modalStatus" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Criado em:</span>
+                    <span id="modalCreatedAt" class="detail-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Atualizado em:</span>
+                    <span id="modalUpdatedAt" class="detail-value"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Nova Transação -->
+<div id="newTransactionModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Nova Transação</h2>
+            <button class="close-modal" data-modal="newTransactionModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="newTransactionForm">
+                <div class="form-group">
+                    <label for="transactionDate">Data</label>
+                    <input type="datetime-local" id="transactionDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDescription">Descrição</label>
+                    <input type="text" id="transactionDescription" name="description" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionValue">Valor</label>
+                    <input type="number" id="transactionValue" name="value" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionType">Tipo</label>
+                    <select id="transactionType" name="type" required>
+                        <option value="input">Entrada</option>
+                        <option value="output">Saída</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionService">Serviço</label>
+                    <select id="transactionService" name="service_id">
+                        <option value="">Selecione um serviço</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionPayment">Método de Pagamento</label>
+                    <select id="transactionPayment" name="payment_method" required>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="pix">PIX</option>
+                        <option value="cartao">Cartão</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionStatus">Status</label>
+                    <select id="transactionStatus" name="status" required>
+                        <option value="concluido">Concluído</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Salvar</button>
+                    <button type="button" class="btn-secondary close-modal" data-modal="newTransactionModal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Editar Transação -->
+<div id="editTransactionModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Editar Transação</h2>
+            <button class="close-modal" data-modal="editTransactionModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="editTransactionForm">
+                <input type="hidden" id="editTransactionId" name="id">
+                <div class="form-group">
+                    <label for="editTransactionDate">Data</label>
+                    <input type="datetime-local" id="editTransactionDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionDescription">Descrição</label>
+                    <input type="text" id="editTransactionDescription" name="description" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionValue">Valor</label>
+                    <input type="number" id="editTransactionValue" name="value" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionType">Tipo</label>
+                    <select id="editTransactionType" name="type" required>
+                        <option value="input">Entrada</option>
+                        <option value="output">Saída</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionService">Serviço</label>
+                    <select id="editTransactionService" name="service_id">
+                        <option value="">Selecione um serviço</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionPayment">Método de Pagamento</label>
+                    <select id="editTransactionPayment" name="payment_method" required>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="pix">PIX</option>
+                        <option value="cartao">Cartão</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionStatus">Status</label>
+                    <select id="editTransactionStatus" name="status" required>
+                        <option value="concluido">Concluído</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Salvar</button>
+                    <button type="button" class="btn-secondary close-modal" data-modal="editTransactionModal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

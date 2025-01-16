@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <title>Dashboard - GIELMAJ Admin</title>
-    <link rel="stylesheet" href="../styles.css?v=1.0.2">
-    <link rel="stylesheet" href="dashboard.css?v=1.0.2">
-    <link rel="stylesheet" href="components/home/home.css?v=1.0.2">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="components/home/home.css">
+    <link rel="stylesheet" href="components/transactions/transactions.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </head>
 <body class="dashboard-body">
     <div class="dashboard-container">
@@ -66,48 +66,7 @@
                 <div id="homeContainer" class="content-section"></div>
                 
                 <!-- Transactions Content -->
-                <div id="transactionsContent" class="content-section">
-                    <section id="transactions" class="dashboard-section">
-                        <div class="section-header">
-                            <h2>Transações</h2>
-                        </div>
-                        <div class="section-actions">
-                            <button id="addTransactionBtn" class="btn-primary">
-                                <i class="fas fa-plus"></i>
-                                Nova Transação
-                            </button>
-                        </div>
-                        <div class="transactions-header">
-                            <div class="transactions-filters">
-                                <input type="text" placeholder="Buscar transação..." class="search-input">
-                                <select class="filter-select">
-                                    <option value="all">Todos Status</option>
-                                    <option value="concluido">Concluído</option>
-                                    <option value="pendente">Pendente</option>
-                                    <option value="cancelado">Cancelado</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="transactions-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Tipo</th>
-                                        <th>Valor</th>
-                                        <th>Serviço</th>
-                                        <th>Data</th>
-                                        <th>Status</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="transactionsTableBody">
-                                    <!-- Transaction rows will be added here dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                </div>
+                <div id="transactionsContent" class="content-section"></div>
             </div>
         </main>
     </div>
@@ -287,7 +246,6 @@
     <!-- Container de Notificações -->
     <div id="notificationContainer" class="notification-container"></div>
 
-    <script type="module" src="../config.js?v=1.0.2"></script>
-    <script type="module" src="dashboard.js?v=1.0.2"></script>
+    <script type="module" src="dashboard.js?v=1.0.1"></script>
 </body>
 </html>

@@ -1,14 +1,15 @@
 import config from '../config.js';
+import { updateDashboardData } from './components/home/home.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const menuToggle = document.getElementById('menuToggle');
     const leftMenu = document.getElementById('leftMenu');
     const logoutBtn = document.getElementById('logoutBtn');
     const modal = document.getElementById('transactionModal');
     const closeModal = document.querySelector('.close-modal');
 
-    // Load initial dashboard data
-    updateDashboardData();
+    // Carregar o componente Home inicialmente
+    await loadContent('home');
 
     // Add event listeners for transaction filters
     const searchInput = document.querySelector('.search-input');
@@ -167,50 +168,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to load content
-    function loadContent(page, contentArea) {
+    async function loadContent(page) {
         const allSections = document.querySelectorAll('.content-section');
         allSections.forEach(section => section.classList.remove('active'));
 
         switch(page) {
             case 'home':
-                document.getElementById('homeContent').classList.add('active');
+                const homeContainer = document.getElementById('homeContainer');
+                const homeResponse = await fetch('./components/home/home.html');
+                const homeContent = await homeResponse.text();
+                homeContainer.innerHTML = homeContent;
+                homeContainer.classList.add('active');
                 updateDashboardData();
                 break;
             case 'transactions':
                 document.getElementById('transactionsContent').classList.add('active');
                 updateTransactionsTable();
                 break;
-            default:
-                document.getElementById('homeContent').classList.add('active');
-                console.log('Page not found, showing home');
-        }
-    }
-
-    // Function to update dashboard data
-    async function updateDashboardData() {
-        try {
-            const response = await fetch(`${config.apiBaseUrl}/transactions`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const transactions = await response.json();
-            
-            const today = new Date().toISOString().split('T')[0];
-            const todayTransactions = transactions.filter(t => 
-                t.date.startsWith(today) && t.status === 'concluido'
-            );
-            
-            const totalValue = todayTransactions.reduce((sum, t) => {
-                return t.type === 'output' ? sum - t.value : sum + t.value;
-            }, 0);
-            
-            document.getElementById('todayTransactions').textContent = todayTransactions.length;
-            document.getElementById('totalValue').textContent = formatCurrency(totalValue);
-            
-        } catch (error) {
-            console.error('Error fetching transaction data:', error);
-            document.getElementById('todayTransactions').textContent = '-';
-            document.getElementById('totalValue').textContent = '-';
         }
     }
 

@@ -6,6 +6,7 @@
     <title>Dashboard - GIELMAJ Admin</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="components/home/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="dashboard-body">
@@ -59,28 +60,7 @@
             <!-- Conteúdo do Dashboard -->
             <div class="dashboard-content">
                 <!-- Home Content -->
-                <div id="homeContent" class="content-section active">
-                    <div class="dashboard-cards">
-                        <div class="dashboard-card">
-                            <div class="card-icon">
-                                <i class="fas fa-exchange-alt"></i>
-                            </div>
-                            <div class="card-info">
-                                <h3>Transações Hoje</h3>
-                                <p id="todayTransactions">0</p>
-                            </div>
-                        </div>
-                        <div class="dashboard-card">
-                            <div class="card-icon">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                            <div class="card-info">
-                                <h3>Valor Total</h3>
-                                <p id="totalValue">R$ 0,00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="homeContainer" class="content-section"></div>
                 
                 <!-- Transactions Content -->
                 <div id="transactionsContent" class="content-section">

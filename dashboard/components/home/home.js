@@ -14,14 +14,16 @@ export async function updateDashboardData() {
         const stats = transactions.reduce((acc, transaction) => {
             const transactionDate = transaction.date.split('T')[0];
             const value = parseFloat(transaction.value) || 0;
+            const isOutput = transaction.type === 'output';
             
-            // Incrementar total geral
-            acc.totalValue += value;
+            // Adicionar ou subtrair do total geral baseado no tipo
+            acc.totalValue += isOutput ? -value : value;
             
             // Se for uma transação de hoje
             if (transactionDate === today) {
                 acc.todayTransactions++;
-                acc.todayValue += value;
+                // Adicionar ou subtrair do total de hoje baseado no tipo
+                acc.todayValue += isOutput ? -value : value;
             }
             
             return acc;
